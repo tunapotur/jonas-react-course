@@ -94,7 +94,8 @@ function Menu() {
         <p>We're still working on our menu. Please come back later :)</p>
       )}
 
-      {/* <Pizza
+      {/* 
+      <Pizza
         name="Pizza Spinaci"
         ingredients="Tomato, mozarella, spinach, and ricotta cheese"
         photoName="pizzas/spinaci.jpg"
@@ -105,7 +106,8 @@ function Menu() {
         ingredients="Tomato, mushrooms"
         price={12}
         photoName="pizzas/funghi.jpg"
-      /> */}
+      /> 
+      */}
     </main>
   );
 }
