@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dog Breeds</title>
+  </head>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      list-style: none;
+    }
+    img {
+      width: 15em;
+      height: 15em;
+      margin: 5px;
+    }
+    h1 {
+      text-transform: capitalize;
+    }
+  </style>
+  <body>
+    <h1>Whats your favorite dog breeds? Click One!</h1>
+    <ul id="dogs">
+      <li>
+        <img
+          src="https://images.dog.ceo/breeds/pomeranian/n02112018_5554.jpg"
+          alt="pomeranian"
+        />
+      </li>
+      <li>
+        <img
+          src="https://images.dog.ceo/breeds/labrador/n02099712_3698.jpg"
+          alt="labrador"
+        />
+      </li>
+      <li>
+        <img
+          src="https://images.dog.ceo/breeds/retriever-golden/n02099601_8181.jpg"
+          alt="retriever"
+        />
+      </li>
+      <li>
+        <img
+          src="https://images.dog.ceo/breeds/poodle-miniature/n02113712_1226.jpg"
+          alt="poodle"
+        />
+      </li>
+      <li>
+        <img
+          src="https://images.dog.ceo/breeds/beagle/n02088364_17530.jpg"
+          alt="beagle"
+        />
+      </li>
+      <li>
+        <img
+          src="https://images.dog.ceo/breeds/germanshepherd/n02106662_1451.jpg"
+          alt="germanshepherd"
+        />
+      </li>
+    </ul>
+    <h1>Random photos of your chosen dog breed</h1>
+    <img
+      id="random"
+      src="https://static4.depositphotos.com/1000792/366/v/600/depositphotos_3660872-stock-illustration-running-funny-puppy.jpg"
+      alt="randomly"
+    />
+    <script>
+      const getDogFoto = async (dog_breed) => {
+        const url = `https://dog.ceo/api/breed/${dog_breed}/images/random`;
+        // Response Object
+        const response = await fetch(url);
+        // Json object
+        const image_url = await response.json();
+
+        return image_url.message;
+      };
+
+      const setDogFotoUrl = async (dog_breed, element) => {
+        const url = await getDogFoto(dog_breed);
+        element.src = url;
+      };
+
+      const random = document.getElementById("random");
+      const dogs = document.getElementById("dogs");
+
+      dogs.addEventListener("click", (e) => {
+        if (e.target.tagName === "IMG") setDogFotoUrl(e.target.alt, random);
+      });
+    </script>
+  </body>
+</html>
