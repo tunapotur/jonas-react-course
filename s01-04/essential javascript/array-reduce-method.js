@@ -145,6 +145,11 @@ function getBooks() {
  * This method has initial value as the second parameter.
  */
 console.log("\nArray Reduce Method");
+
+const values = [1, 3, 5, 7, 9, 11];
+const reduceValues = values.reduce((acc, value) => acc + value, 0);
+console.log(reduceValues);
+
 const books = getBooks();
 
 const pagesAllBooks = books.reduce((acc, book) => acc + book.pages, 0);
