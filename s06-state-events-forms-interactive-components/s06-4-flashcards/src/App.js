@@ -1,5 +1,5 @@
-import { useState } from "react";
 import "./styles.css";
+import { useState } from "react";
 
 export default function App() {
   return (
@@ -43,43 +43,27 @@ const questions = [
   },
 ];
 
+//* instructor solution
 function FlashCards() {
-  const [questionList, setQuestionList] = useState(
-    questions.map((question) => ({ ...question, isClicked: false }))
-  );
+  const [selectedId, setSelectedId] = useState(null);
 
-  function handleClickQuestion(id) {
-    setQuestionList((questionList) =>
-      questionList.map((question) =>
-        question.id === id
-          ? { ...question, isClicked: !question.isClicked }
-          : { ...question, isClicked: false }
-      )
-    );
+  function handleClick(id) {
+    setSelectedId(id !== selectedId ? id : null);
   }
 
   return (
     <div className="flashcards">
-      {questionList.map((question) => (
-        <Question
+      {questions.map((question) => (
+        <div
           key={question.id}
-          question={question}
-          onClickQuestion={handleClickQuestion}
-        />
+          onClick={() => handleClick(question.id)}
+          className={question.id === selectedId ? "selected" : ""}
+        >
+          <p>
+            {question.id === selectedId ? question.answer : question.question}
+          </p>
+        </div>
       ))}
-    </div>
-  );
-}
-
-function Question({ question, onClickQuestion }) {
-  return (
-    <div
-      className={`${question.isClicked ? "selected" : ""}`}
-      key={question.id}
-      // onClick={() => setIsClicked((clicked) => !isClicked)}
-      onClick={() => onClickQuestion(question.id)}
-    >
-      <p>{question.isClicked ? question.answer : question.question}</p>
     </div>
   );
 }
