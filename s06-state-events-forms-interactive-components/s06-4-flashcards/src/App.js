@@ -44,25 +44,42 @@ const questions = [
 ];
 
 function FlashCards() {
+  const [questionList, setQuestionList] = useState(
+    questions.map((question) => ({ ...question, isClicked: false }))
+  );
+
+  function handleClickQuestion(id) {
+    setQuestionList((questionList) =>
+      questionList.map((question) =>
+        question.id === id
+          ? { ...question, isClicked: !question.isClicked }
+          : { ...question, isClicked: false }
+      )
+    );
+  }
+
   return (
     <div className="flashcards">
-      {questions.map((question) => (
-        <Question key={question.id} question={question} />
+      {questionList.map((question) => (
+        <Question
+          key={question.id}
+          question={question}
+          onClickQuestion={handleClickQuestion}
+        />
       ))}
     </div>
   );
 }
 
-function Question({ question }) {
-  const [isClicked, setIsClicked] = useState(false);
-
+function Question({ question, onClickQuestion }) {
   return (
     <div
-      className={`${isClicked ? "selected" : ""}`}
+      className={`${question.isClicked ? "selected" : ""}`}
       key={question.id}
-      onClick={() => setIsClicked(!isClicked)}
+      // onClick={() => setIsClicked((clicked) => !isClicked)}
+      onClick={() => onClickQuestion(question.id)}
     >
-      <p>{question.question}</p>
+      <p>{question.isClicked ? question.answer : question.question}</p>
     </div>
   );
 }
