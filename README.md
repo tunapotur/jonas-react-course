@@ -1,4 +1,4 @@
-# jonas-react-course
+# jonas-react-course-part-1
 
 ## Jonas Schmedtmann
 
