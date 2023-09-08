@@ -35,6 +35,7 @@ export default function App() {
   const [selectedFriend, setSelectedFriend] = useState(null);
 
   function handleShowAddFriend() {
+    // This is very useful when you need to toggle a boolean value
     setShowAddFriend((show) => !show);
   }
 
